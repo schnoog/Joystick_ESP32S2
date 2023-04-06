@@ -31,14 +31,6 @@
 ///Adafruit_USBD_HID				 _usb_hid;
 
 
-#define _USING_DYNAMIC_HID
-
-
-#if !defined(_USING_DYNAMIC_HID)
-
-#warning "Using legacy HID core (non pluggable)"
-
-#else // !defined(_USING_DYNAMIC_HID)
 
 //================================================================================
 //  Joystick (Gamepad)
@@ -224,5 +216,5 @@ public:
 	uint16_t _onGetDescriptor(uint8_t* buffer);
 };
 
-#endif // !defined(_USING_DYNAMIC_HID)
+
 #endif // JOYSTICK_h
