@@ -1,24 +1,17 @@
-// Program used to test the USB Joystick object on the 
-// Arduino Leonardo or Arduino Micro.
+// Program used to test the USB Joystick library when used as 
+// a Flight Controller on the Arduino Leonardo or Arduino 
+// Micro.
 //
 // Matthew Heironimus
-// 2015-03-28 - Original Version
-// 2015-11-18 - Updated to use the new Joystick library 
-//              written for Arduino IDE Version 1.6.6 and
-//              above.
-// 2016-05-13   Updated to use new dynamic Joystick library
-//              that can be customized.
-// 2022-03-29   Updated to work with version 2.1.0 of the
-//              Joystick library.
+// 2016-05-29 - Original Version
 //------------------------------------------------------------
 
-#include "Joystick_tiny.h"
+#include "Joystick.h"
 
-// Create Joystick
 Joystick_ Joystick(JOYSTICK_DEFAULT_REPORT_ID, 
-  JOYSTICK_TYPE_MULTI_AXIS, 128, 4,
-  true, true, true, true, true, true,
-  true, true, true, true, true);
+  JOYSTICK_TYPE_MULTI_AXIS, 32, 0,
+  true, true, false, false, false, false,
+  true, true, false, false, false);
 
 // Set to true to test "Auto Send" mode or false to test "Manual Send" mode.
 //const bool testAutoSendMode = true;
@@ -44,7 +37,7 @@ void testSingleButtonPush(unsigned int button)
 
 void testMultiButtonPush(unsigned int currentStep) 
 {
-  for (int button = 0; button < 127; button++)
+  for (int button = 0; button < 32; button++)
   {
     if ((currentStep == 0) || (currentStep == 2))
     {
@@ -108,104 +101,19 @@ void testXYAxis(unsigned int currentStep)
   }
 }
 
-void testZAxis(unsigned int currentStep)
-{
-  int z;
-
-  if (currentStep < 128)
-  {
-    z = -currentStep;
-  } 
-  else if (currentStep < 256 + 128)
-  {
-    z = currentStep - 128 - 127;
-  } 
-  else if (currentStep < 256 + 128 + 127)
-  {
-    z = 127 - (currentStep - 383);
-  } 
-  
-  Joystick.setZAxis(z);
-}
-
-void testHatSwitch(unsigned int currentStep)
-{
-  if (currentStep < 8)
-  {
-    Joystick.setHatSwitch(0, currentStep * 45);
-  }
-  else if (currentStep == 8)
-  {
-    Joystick.setHatSwitch(0, -1);
-  }
-  else if (currentStep < 17)
-  {
-    Joystick.setHatSwitch(1, (currentStep - 9) * 45);
-  }
-  else if (currentStep == 17)
-  {
-    Joystick.setHatSwitch(1, -1);
-  }
-  else if (currentStep == 18)
-  {
-    Joystick.setHatSwitch(0, 0);
-    Joystick.setHatSwitch(1, 0);
-  }
-  else if (currentStep < 27)
-  {
-    Joystick.setHatSwitch(0, (currentStep - 18) * 45);
-    Joystick.setHatSwitch(1, (8 - (currentStep - 18)) * 45);
-  }
-  else if (currentStep == 27)
-  {
-    Joystick.setHatSwitch(0, -1);
-    Joystick.setHatSwitch(1, -1);
-  }
-}
-
 void testThrottleRudder(unsigned int value)
 {
   Joystick.setThrottle(value);
-  Joystick.setRudder(value);
+  Joystick.setRudder(255 - value);
 }
-
-void testXYZAxisRotation(unsigned int degree)
-{
-  Joystick.setRxAxis(degree);
-  Joystick.setRyAxis(degree);
-  Joystick.setRzAxis(degree * 2);
-}
-
-void MyButtonTest() 
-{
-  for (int button = 0; button < 127; button++)
-  {
-        Joystick.pressButton(button);
-        Joystick.sendState();
-        delay(500);
-        Joystick.releaseButton(button);
-        
-  }
-  Joystick.sendState();
-}
-
-
-
-
-
 
 void setup() {
-  Serial.begin(115200);
-  Serial.setDebugOutput(true);
-  // Set Range Values
+
   Joystick.setXAxisRange(-127, 127);
   Joystick.setYAxisRange(-127, 127);
   Joystick.setZAxisRange(-127, 127);
-  Joystick.setRxAxisRange(0, 360);
-  Joystick.setRyAxisRange(360, 0);
-  Joystick.setRzAxisRange(0, 720);
   Joystick.setThrottleRange(0, 255);
-  Joystick.setRudderRange(255, 0);
+  Joystick.setRudderRange(0, 255);
   
   if (testAutoSendMode)
   {
@@ -215,20 +123,23 @@ void setup() {
   {
     Joystick.begin(false);
   }
-  Serial.println("joystick started");
-
+  
+  pinMode(A0, INPUT_PULLUP);
+  pinMode(LED_BUILTIN, OUTPUT);
 }
 
-void loop(){
-  MyButtonTest();
-}
-
-
-
-void loopx() {
+void loop() {
 
   // System Disabled
+  if (digitalRead(A0) != 0)
+  {
+    // Turn indicator light off.
+    digitalWrite(LED_BUILTIN, 0);
+    return;
+  }
 
+  // Turn indicator light on.
+  digitalWrite(LED_BUILTIN, 1);
   
   if (millis() >= gNextTime)
   {
@@ -253,21 +164,6 @@ void loopx() {
       gNextTime = millis() + gcAnalogDelta;
       testXYAxis(gCurrentStep - (37 + 256));
     }
-    else if (gCurrentStep < (37 + 256 + 1024 + 128 + 510))
-    {
-      gNextTime = millis() + gcAnalogDelta;
-      testZAxis(gCurrentStep - (37 + 256 + 1024 + 128));
-    }
-    else if (gCurrentStep < (37 + 256 + 1024 + 128 + 510 + 28))
-    {
-      gNextTime = millis() + gcButtonDelta;
-      testHatSwitch(gCurrentStep - (37 + 256 + 1024 + 128 + 510));
-    }
-    else if (gCurrentStep < (37 + 256 + 1024 + 128 + 510 + 28 + 360))
-    {
-      gNextTime = millis() + gcAnalogDelta;
-      testXYZAxisRotation(gCurrentStep - (37 + 256 + 1024 + 128 + 510 + 28));
-    }
     
     if (testAutoSendMode == false)
     {
@@ -275,10 +171,11 @@ void loopx() {
     }
     
     gCurrentStep++;
-    if (gCurrentStep == (37 + 256 + 1024 + 128 + 510 + 28 + 360))
+    if (gCurrentStep >= (37 + 256 + 1024 + 128))
     {
       gNextTime = millis() + gcCycleDelta;
       gCurrentStep = 0;
     }
   }
 }
+

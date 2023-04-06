@@ -16,19 +16,18 @@
   You should have received a copy of the GNU Lesser General Public
   License along with this library; if not, write to the Free Software
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+  
+  Edited by Schnoog to make it running on ESP32-S2/s3 devices
+	
 */
 
 #ifndef JOYSTICK_h
 #define JOYSTICK_h
 
-////#ifdef USE_TINYUSB
 #include <stdint.h>
 #include <Arduino.h>
-
 #include "USB.h"
 #include "USBHID.h"
-//USBHID HID;
-///Adafruit_USBD_HID				 _usb_hid;
 
 
 
@@ -101,7 +100,6 @@ private:
     uint8_t   _hidReportSize; 
 
 	USBHID HID;
-	//Adafruit_USBD_HID				 _usb_hid;
 
 protected:
     int buildAndSet16BitValue(bool includeValue, int32_t value, int32_t valueMinimum, int32_t valueMaximum, int32_t actualMinimum, int32_t actualMaximum, uint8_t dataLocation[]);
@@ -129,7 +127,6 @@ public:
         bool includeBrake = true,
         bool includeSteering = true);
 
-    ////void begin(bool initAutoSendState = true);
     void begin(bool initAutoSendState = true, uint8_t interval_ms = 2);
 	
 	void end();

@@ -1,5 +1,5 @@
 /*
-  Joystick.cpp
+  Joystick_ESP32S2.cpp
 
   Copyright (c) 2015-2017, Matthew Heironimus
 
@@ -16,11 +16,11 @@
   You should have received a copy of the GNU Lesser General Public
   License along with this library; if not, write to the Free Software
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+  
+  Edited by Schnoog to make it running on ESP32-S2/s3 devices
 */
 
-#include "Joystick.h"
-
-#if defined(_USING_DYNAMIC_HID)
+#include "Joystick_ESP32S2.h"
 
 #define JOYSTICK_REPORT_ID_INDEX 7
 #define JOYSTICK_AXIS_MINIMUM 0
@@ -40,6 +40,8 @@
 #define JOYSTICK_INCLUDE_ACCELERATOR B00000100
 #define JOYSTICK_INCLUDE_BRAKE       B00001000
 #define JOYSTICK_INCLUDE_STEERING    B00010000
+
+
 
 Joystick_::Joystick_(
 	uint8_t hidReportId,
@@ -79,7 +81,6 @@ Joystick_::Joystick_(
 	_includeSimulatorFlags |= (includeSteering ? JOYSTICK_INCLUDE_STEERING : 0);
 	
     // Build Joystick HID Report Description
-	
 	// Button Calculations
 	uint8_t buttonsInLastByte = _buttonCount % 8;
 	uint8_t buttonPaddingBits = 0;
@@ -103,7 +104,7 @@ Joystick_::Joystick_(
 		+ (includeSteering == true); 
 		
     uint8_t tempHidReportDescriptor[150];
-    int hidReportDescriptorSize = 0;
+    hidReportDescriptorSize = 0;
 
     // USAGE_PAGE (Generic Desktop)
     tempHidReportDescriptor[hidReportDescriptorSize++] = 0x05;
@@ -433,13 +434,12 @@ Joystick_::Joystick_(
     tempHidReportDescriptor[hidReportDescriptorSize++] = 0xc0;
 
 	// Create a copy of the HID Report Descriptor template that is just the right size
-	uint8_t *customHidReportDescriptor = new uint8_t[hidReportDescriptorSize];
+	//org: uint8_t *customHidReportDescriptor = new uint8_t[hidReportDescriptorSize];
+	customHidReportDescriptor = new uint8_t[hidReportDescriptorSize];
 	memcpy(customHidReportDescriptor, tempHidReportDescriptor, hidReportDescriptorSize);
 	
 	// Register HID Report Description
-	DynamicHIDSubDescriptor *node = new DynamicHIDSubDescriptor(customHidReportDescriptor, hidReportDescriptorSize, false);
-	DynamicHID().AppendDescriptor(node);
-	
+	HID.addDevice(this, hidReportDescriptorSize);
     // Setup Joystick State
 	if (buttonCount > 0) {
 		_buttonValuesArraySize = _buttonCount / 8;
@@ -475,10 +475,20 @@ Joystick_::Joystick_(
     {
         _buttonValues[index] = 0;
     }
+
+
 }
 
-void Joystick_::begin(bool initAutoSendState)
+
+  uint16_t Joystick_::_onGetDescriptor(uint8_t* buffer){
+    memcpy(buffer, customHidReportDescriptor,hidReportDescriptorSize);
+    return hidReportDescriptorSize;
+  }
+
+
+void Joystick_::begin(bool initAutoSendState, uint8_t intervalMs)
 {
+	HID.begin();
 	_autoSendState = initAutoSendState;
 	sendState();
 }
@@ -676,7 +686,9 @@ void Joystick_::sendState()
 	index += buildAndSetSimulationValue(_includeSimulatorFlags & JOYSTICK_INCLUDE_BRAKE, _brake, _brakeMinimum, _brakeMaximum, &(data[index]));
 	index += buildAndSetSimulationValue(_includeSimulatorFlags & JOYSTICK_INCLUDE_STEERING, _steering, _steeringMinimum, _steeringMaximum, &(data[index]));
 
-	DynamicHID().SendReport(_hidReportId, data, _hidReportSize);
-}
 
-#endif
+	if (HID.ready()) {
+		HID.SendReport(_hidReportId, data, sizeof(data));
+	}
+
+}
