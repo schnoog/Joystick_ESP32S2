@@ -44,7 +44,7 @@ void testSingleButtonPush(unsigned int button)
 
 void testMultiButtonPush(unsigned int currentStep) 
 {
-  for (int button = 0; button < 32; button++)
+  for (int button = 0; button < 127; button++)
   {
     if ((currentStep == 0) || (currentStep == 2))
     {
@@ -176,6 +176,24 @@ void testXYZAxisRotation(unsigned int degree)
   Joystick.setRzAxis(degree * 2);
 }
 
+void MyButtonTest() 
+{
+  for (int button = 0; button < 127; button++)
+  {
+        Joystick.pressButton(button);
+        Joystick.sendState();
+        delay(500);
+        Joystick.releaseButton(button);
+        
+  }
+  Joystick.sendState();
+}
+
+
+
+
+
+
 void setup() {
   Serial.begin(115200);
   Serial.setDebugOutput(true);
@@ -201,7 +219,13 @@ void setup() {
 
 }
 
-void loop() {
+void loop(){
+  MyButtonTest();
+}
+
+
+
+void loopx() {
 
   // System Disabled
 

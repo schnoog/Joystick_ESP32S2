@@ -1,10 +1,14 @@
-# Arduino Joystick Library
+# ESP32-S2/S3 Joystick Library
 
-#### Version 2.1.1
+##### based on Matthew Heironimus great Arduino Joystick lirary 
 
-##### My try (and most likely failure) to make this great library working on an ESP32S2
+#### Version 0.9 - forked from Version 2.1.1
 
-This library can be used with Arduino IDE 1.6.6 or above (see [Wiki - Testing Details](https://github.com/MHeironimus/ArduinoJoystickLibrary/wiki/Testing-Details) for more information) to add one or more joysticks (or gamepads) to the list of HID devices an [Arduino Leonardo](https://www.arduino.cc/en/Main/ArduinoBoardLeonardo) or [Arduino Micro](https://www.arduino.cc/en/Main/ArduinoBoardMicro) (or any Arduino clone that is based on the ATmega32u4) can support. This library will also work with the [Arduino Due](https://www.arduino.cc/en/Main/ArduinoBoardDue), thanks to [@Palakis](https://github.com/Palakis). A complete list of supported boards can be found in the [Wiki - Supported Boards](https://github.com/MHeironimus/ArduinoJoystickLibrary/wiki/Supported-Boards). This will not work with Arduino IDE 1.6.5 (or below) or with non-32u4 based Arduino devices (e.g. Arduino UNO, Arduino MEGA, etc.).
+
+This library can be used with Arduino IDE 1.6.6 or above (see [Wiki - Testing Details](https://github.com/MHeironimus/ArduinoJoystickLibrary/wiki/Testing-Details) for more information) to add one or more joysticks (or gamepads) to the list of HID devices an [Arduino Leonardo](https://www.arduino.cc/en/Main/ArduinoBoardLeonardo) or [Arduino Micro](https://www.arduino.cc/en/Main/ArduinoBoardMicro) (or any Arduino clone that is based on the ATmega32u4) can support. This library will also work with the [Arduino Due](https://www.arduino.cc/en/Main/ArduinoBoardDue), thanks to [@Palakis](https://github.com/Palakis). A complete list of supported boards can be found in the [Wiki - Supported Boards](https://github.com/MHeironimus/ArduinoJoystickLibrary/wiki/Supported-Boards). 
+This will not work with Arduino IDE 1.6.5 (or below) or with ESP32-S2/S3 devices (e.g. Arduino UNO, Arduino MEGA, etc.).
+
+To use this library you need to have Arduino core for the ESP32 installed (https://github.com/espressif/arduino-esp32)
 
 ## Features
 
