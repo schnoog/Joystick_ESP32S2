@@ -15,7 +15,10 @@
 #include "Joystick_tiny.h"
 
 // Create Joystick
-Joystick_ Joystick;
+Joystick_ Joystick(JOYSTICK_DEFAULT_REPORT_ID, 
+  JOYSTICK_TYPE_MULTI_AXIS, 128, 4,
+  true, true, true, true, true, true,
+  true, true, true, true, true);
 
 // Set to true to test "Auto Send" mode or false to test "Manual Send" mode.
 //const bool testAutoSendMode = true;
@@ -195,22 +198,13 @@ void setup() {
     Joystick.begin(false);
   }
   Serial.println("joystick started");
-  pinMode(A0, INPUT_PULLUP);
-  pinMode(LED_BUILTIN, OUTPUT);
+
 }
 
 void loop() {
 
   // System Disabled
-  if (digitalRead(A0) != 0)
-  {
-    // Turn indicator light off.
-    digitalWrite(LED_BUILTIN, 0);
-    return;
-  }
 
-  // Turn indicator light on.
-  digitalWrite(LED_BUILTIN, 1);
   
   if (millis() >= gNextTime)
   {

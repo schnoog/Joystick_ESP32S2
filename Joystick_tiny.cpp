@@ -697,7 +697,8 @@ void Joystick_::sendState()
 //	  }
 
 		if (HID.ready()) {
-		HID.SendReport(_hidReportId, data, _hidReportSize,2);
+		//HID.SendReport(_hidReportId, data, _hidReportSize,2);
+    HID.SendReport(_hidReportId, data, sizeof(data));
 	  }
 
 	//  if (TinyUSBDevice.suspended())
