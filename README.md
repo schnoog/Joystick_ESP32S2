@@ -244,22 +244,22 @@ See the [Wiki](https://github.com/MHeironimus/ArduinoJoystickLibrary/wiki) for m
 
 #### PlatformIO
 Add the 2 build flags to your platformio.ini file
-`
+
 build_flags =
 	....
     -DUSB_VID=0xF011
     -DUSB_PID=0xF011
-`
+
 
 #### Arduino IDE
 Unfortunately I have not found an easier way to do so than editing
 C:\Users\<UserName>\AppData\Local\Arduino15\packages\esp32\hardware\esp32\2.0.7\cores\esp32\USB.cpp
 by adding
-`
-#define USB_VID 0xFO11
-#define USB_PID 0xF011
-`
+
+ #define USB_VID 0xFO11
+ #define USB_PID 0xF011
+
 between the line
-`#include "StreamString.h"
-#ifndef USB_VID
-`
+ #include "StreamString.h"
+ #ifndef USB_VID
+
