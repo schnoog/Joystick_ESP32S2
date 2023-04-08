@@ -21,7 +21,7 @@
 // 2016-05-30
 //--------------------------------------------------------------------
 
-#include <Joystick.h>
+#include <Joystick_ESP32S2.h>
 
 Joystick_ Joystick(JOYSTICK_DEFAULT_REPORT_ID, 
   JOYSTICK_TYPE_GAMEPAD, 0,

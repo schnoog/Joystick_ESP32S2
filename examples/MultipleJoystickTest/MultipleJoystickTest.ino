@@ -8,7 +8,7 @@
 // 2016-05-13 - Original Version
 // 2022-03-29 - Updated to work with Joystick Library v2.1.0
 //------------------------------------------------------------
-#include <Joystick.h>
+#include <Joystick_ESP32S2.h>
 
 #define JOYSTICK_COUNT 4
 

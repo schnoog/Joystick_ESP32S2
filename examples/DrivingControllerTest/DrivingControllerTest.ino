@@ -6,7 +6,7 @@
 // 2016-05-29   Original version.
 //------------------------------------------------------------
 
-#include "Joystick.h"
+#include <Joystick_ESP32S2.h>
 
 Joystick_ Joystick(JOYSTICK_DEFAULT_REPORT_ID, 
   JOYSTICK_TYPE_MULTI_AXIS, 4, 0,

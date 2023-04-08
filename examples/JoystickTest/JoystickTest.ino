@@ -12,7 +12,7 @@
 //              Joystick library.
 //------------------------------------------------------------
 
-#include "Joystick.h"
+#include <Joystick_ESP32S2.h>
 
 // Create Joystick
 Joystick_ Joystick;

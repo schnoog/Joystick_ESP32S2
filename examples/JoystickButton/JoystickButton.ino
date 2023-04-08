@@ -11,7 +11,7 @@
 // 2015-11-20
 //--------------------------------------------------------------------
 
-#include <Joystick.h>
+#include <Joystick_ESP32S2.h>
 
 Joystick_ Joystick;
 

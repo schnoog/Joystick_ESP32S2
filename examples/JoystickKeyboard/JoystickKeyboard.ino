@@ -17,7 +17,8 @@
 //--------------------------------------------------------------------
 
 #include <Keyboard.h>
-#include <Joystick.h>
+
+#include <Joystick_ESP32S2.h>
 
 Joystick_ Joystick;
 

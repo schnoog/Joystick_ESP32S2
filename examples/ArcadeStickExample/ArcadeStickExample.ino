@@ -32,7 +32,7 @@
 // 2019-05-20
 //--------------------------------------------------------------------
 
-#include <Joystick.h>
+#include <Joystick_ESP32S2.h>
 
 Joystick_ Joystick(JOYSTICK_DEFAULT_REPORT_ID,JOYSTICK_TYPE_GAMEPAD,
   8, 0,                  // Button Count, Hat Switch Count
