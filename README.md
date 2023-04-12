@@ -5,8 +5,8 @@
 #### Version 0.9 - forked from Version 2.1.1
 
 
-This library can be used with Arduino IDE 1.6.6 or above (see [Wiki - Testing Details](https://github.com/MHeironimus/ArduinoJoystickLibrary/wiki/Testing-Details) for more information) to add one or more joysticks (or gamepads) to the list of HID devices an [Arduino Leonardo](https://www.arduino.cc/en/Main/ArduinoBoardLeonardo) or [Arduino Micro](https://www.arduino.cc/en/Main/ArduinoBoardMicro) (or any Arduino clone that is based on the ATmega32u4) can support. This library will also work with the [Arduino Due](https://www.arduino.cc/en/Main/ArduinoBoardDue), thanks to [@Palakis](https://github.com/Palakis). A complete list of supported boards can be found in the [Wiki - Supported Boards](https://github.com/MHeironimus/ArduinoJoystickLibrary/wiki/Supported-Boards). 
-This will not work with Arduino IDE 1.6.5 (or below) or with ESP32-S2/S3 devices (e.g. Arduino UNO, Arduino MEGA, etc.).
+
+This will not work with Arduino IDE 1.6.5 (or below) or with non ESP32-S2/S3 devices (e.g. Arduino UNO, Arduino MEGA, etc.).
 
 To use this library you need to have Arduino core for the ESP32 installed (https://github.com/espressif/arduino-esp32)
 
@@ -27,7 +27,7 @@ The joystick or gamepad can have the following features:
 
 The following instructions can be used to install the latest version of the library in the Arduino IDE (thanks to [@per1234](https://github.com/per1234) for this update):
 
-1. Download https://github.com/MHeironimus/ArduinoJoystickLibrary/archive/master.zip
+1. Download https://github.com/schnoog/Joystick_ESP32S2/archive/master.zip
 2. In the Arduino IDE, select `Sketch` > `Include Library` > `Add .ZIP Library...`.  Browse to where the downloaded ZIP file is located and click `Open`. The Joystick library's examples will now appear under `File` > `Examples` > `Joystick`.
 
 ## Examples
@@ -35,7 +35,7 @@ The following instructions can be used to install the latest version of the libr
 ### Simple example
 
 ```C++
-#include <Joystick.h>
+#include <Joystick_ESP32S2.h>
 
 // Create the Joystick
 Joystick_ Joystick;
