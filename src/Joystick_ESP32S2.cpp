@@ -688,7 +688,7 @@ void Joystick_::sendState()
 
 
 	if (HID.ready()) {
-		HID.SendReport(_hidReportId, data, sizeof(data));
+		HID.SendReport(_hidReportId, data, sizeof(data),0);
 	}
 
 }
