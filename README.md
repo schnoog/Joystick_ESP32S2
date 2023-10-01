@@ -25,10 +25,16 @@ The joystick or gamepad can have the following features:
 
 ## Installation Instructions
 
+### Library manager
+Just search for **Joystick_ESP32S2** in the library manager of your installation of ArduinoIDE or PlatformIO and install it. 
+
+### Manual installation
 The following instructions can be used to install the latest version of the library in the Arduino IDE (thanks to [@per1234](https://github.com/per1234) for this update):
 
 1. Download https://github.com/schnoog/Joystick_ESP32S2/archive/master.zip
 2. In the Arduino IDE, select `Sketch` > `Include Library` > `Add .ZIP Library...`.  Browse to where the downloaded ZIP file is located and click `Open`. The Joystick library's examples will now appear under `File` > `Examples` > `Joystick`.
+
+Please keep in mind that a manual installation is not updated by the library manager of your IDE.
 
 ## USB Setup
 If you only want to play arround with it, I propose to enable USB CDC on boot.
@@ -42,7 +48,7 @@ build_flags =
 ``` 
 
 If you want to change your joysticks name, USB product id or vendor id, please consult the
-[USBOPTIONS.md](USBOPTIONS.md)
+[USBOPTIONS.md](USBOPTIONS.md) or have a look into the **Joystick_WithCustomPIDandVID** example provided with this library
 
 ## Examples
 
