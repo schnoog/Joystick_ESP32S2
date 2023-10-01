@@ -25,14 +25,28 @@ The joystick or gamepad can have the following features:
 
 ## Installation Instructions
 ### Library manager
-You can install this library with the library manager of PlatformIO as well as Arduino IDE.
-Just search for Joystick_ESP32S2  and install it.
-
+Just search for **Joystick_ESP32S2** in the library manager of your installation of ArduinoIDE or PlatformIO and install it. 
 ### Manual installation
 The following instructions can be used to install the latest version of the library in the Arduino IDE (thanks to [@per1234](https://github.com/per1234) for this update):
 
 1. Download https://github.com/schnoog/Joystick_ESP32S2/archive/master.zip
 2. In the Arduino IDE, select `Sketch` > `Include Library` > `Add .ZIP Library...`.  Browse to where the downloaded ZIP file is located and click `Open`. The Joystick library's examples will now appear under `File` > `Examples` > `Joystick`.
+
+Please keep in mind that a manual installation is not updated by the library manager of your IDE.
+
+## USB Setup
+If you only want to play arround with it, I propose to enable USB CDC on boot.
+This can be done quite easily
+* **ArduinoIDE**: There's an option in the tools menue to enable USB CDC on boot
+* **PlatformIO**:  Set the option within the platformio.ini of your project
+```
+build_flags =
+	....
+    -DARDUINO_USB_CDC_ON_BOOT=1
+``` 
+
+If you want to change your joysticks name, USB product id or vendor id, please consult the
+[USBOPTIONS.md](USBOPTIONS.md) or have a look into the **Joystick_WithCustomPIDandVID** example provided with this library
 
 ## Examples
 
@@ -243,31 +257,4 @@ Sends the updated joystick state to the host computer. Only needs to be called i
 
 See the [Wiki](https://github.com/MHeironimus/ArduinoJoystickLibrary/wiki) for more details on things like FAQ, supported boards, testing, etc.
 
-
-### Set your custom USB VID/PID
-
-#### PlatformIO
-Add the 2 build flags to your platformio.ini file
-```
-build_flags =
-	....
-    -DUSB_VID=0xF011
-    -DUSB_PID=0xF011
-```
-
-#### Arduino IDE
-Unfortunately I have not found an easier way to do so than editing
-
-`C:\Users\<UserName>\AppData\Local\Arduino15\packages\esp32\hardware\esp32\2.0.7\cores\esp32\USB.cpp`
-
-by adding
-
-```
-#define USB_VID 0xFO11
-//and
-#define USB_PID 0xF011
-```
-right after
-
-`#include "StreamString.h"`
 
