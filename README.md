@@ -24,10 +24,8 @@ The joystick or gamepad can have the following features:
 - Steering (up to 16-bit precision)
 
 ## Installation Instructions
-
 ### Library manager
 Just search for **Joystick_ESP32S2** in the library manager of your installation of ArduinoIDE or PlatformIO and install it. 
-
 ### Manual installation
 The following instructions can be used to install the latest version of the library in the Arduino IDE (thanks to [@per1234](https://github.com/per1234) for this update):
 
