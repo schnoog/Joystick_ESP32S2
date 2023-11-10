@@ -139,9 +139,10 @@ The following constants define the default values for the constructor parameters
 - `JOYSTICK_DEFAULT_BUTTON_COUNT` is set to `32`
 - `JOYSTICK_DEFAULT_HATSWITCH_COUNT` is set to `2`
 
-### Joystick.begin(bool initAutoSendState)
+### Joystick.begin(bool initAutoSendState, uint8_t timeout_ms = 2)
 
 Starts emulating a game controller connected to a computer. By default, all methods update the game controller state immediately. If `initAutoSendState` is set to `false`, the `Joystick.sendState` method must be called to update the game controller state.
+The timeout_ms defines the timeout for the USB communication. 
 
 ### Joystick.end()
 

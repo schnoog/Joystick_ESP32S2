@@ -486,10 +486,10 @@ Joystick_::Joystick_(
   }
 
 
-void Joystick_::begin(bool initAutoSendState, uint8_t intervalMs)
+void Joystick_::begin(bool initAutoSendState, uint8_t timeout_ms)
 {
 	HID.begin();
-	_timeout_ms = intervalMs;
+	_timeout_ms = timeout_ms;
 	_autoSendState = initAutoSendState;
 	sendState();
 }
