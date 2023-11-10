@@ -73,6 +73,7 @@ private:
     uint8_t  _hatSwitchCount;
     uint8_t  _includeAxisFlags;
     uint8_t  _includeSimulatorFlags;
+	uint32_t _timeout_ms = 2;
     int32_t  _xAxisMinimum = JOYSTICK_DEFAULT_AXIS_MINIMUM;
     int32_t  _xAxisMaximum = JOYSTICK_DEFAULT_AXIS_MAXIMUM;
     int32_t  _yAxisMinimum = JOYSTICK_DEFAULT_AXIS_MINIMUM;

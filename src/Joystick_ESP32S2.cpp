@@ -489,6 +489,7 @@ Joystick_::Joystick_(
 void Joystick_::begin(bool initAutoSendState, uint8_t intervalMs)
 {
 	HID.begin();
+	_timeout_ms = intervalMs;
 	_autoSendState = initAutoSendState;
 	sendState();
 }
@@ -688,7 +689,7 @@ void Joystick_::sendState()
 
 
 	if (HID.ready()) {
-		HID.SendReport(_hidReportId, data, sizeof(data),0);
+		HID.SendReport(_hidReportId, data, sizeof(data),_timeout_ms);
 	}
 
 }
