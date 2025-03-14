@@ -23,7 +23,7 @@ The joystick or gamepad can have the following features:
 - Brake (up to 16-bit precision)
 - Steering (up to 16-bit precision)
 
-## Known issues
+#### Known issues
 Unfortunately there is an issue with the Arduino-ESP32 core library which can cause problems if you use the HID joystick and the serial interface at the same time.
 Executing Serial.print or Serial.println, yes even initializing the serial console with Serial.begin() is prone to cause timing issue for the USB data transfer.
 
