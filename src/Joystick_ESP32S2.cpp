@@ -496,7 +496,17 @@ void Joystick_::begin(bool initAutoSendState, uint8_t intervalMs)
 void Joystick_::end()
 {
 }
+void Joystick_::setButtons32(uint32_t states) {
 
+    
+    memcpy(_buttonValues, &states, sizeof(states));
+
+   
+
+    if (_autoSendState) sendState();
+    
+  
+}
 void Joystick_::setButton(uint8_t button, uint8_t value)
 {
 	if (value == 0)
