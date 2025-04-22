@@ -203,6 +203,7 @@ public:
     void setBrake(int32_t value);
     void setSteering(int32_t value);
 
+    void setButtons32(uint32_t states);
     void setButton(uint8_t button, uint8_t value);
     void pressButton(uint8_t button);
     void releaseButton(uint8_t button);
