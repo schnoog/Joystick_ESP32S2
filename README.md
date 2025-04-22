@@ -240,6 +240,10 @@ Sets the range of values that will be used for the Steering. Default: `0` to `10
 
 Sets the Steering value. See `setSteeringRange` for the range.
 
+### Joystick.setButtons32(uint32_t states)
+
+Sets 32 button states at once, no for loop needed. For example `Joystick.setButtons32(ButtonStates);` // maximum buttons 32(0-32). Button 0 will appear as button 1, if your buttons start at button one then use `>> 1` after button states in brackets
+
 ### Joystick.setButton(uint8_t button, uint8_t value)
 
 Sets the state (`0` or `1`) of the specified button (range: `0` - (`buttonCount - 1`)). The button is the 0-based button number (i.e. button #1 is `0`, button #2 is `1`, etc.). The value is `1` if the button is pressed and `0` if the button is released.
