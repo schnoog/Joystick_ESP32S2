@@ -4,15 +4,13 @@
 
 #### Version 0.9 - forked from Version 2.1.1
 
-
-
 This will not work with Arduino IDE 1.6.5 (or below) or with non ESP32-S2/S3 devices (e.g. Arduino UNO, Arduino MEGA, etc.).
 
-To use this library you need to have Arduino core for the ESP32 installed (https://github.com/espressif/arduino-esp32)
+To use this library you need to have [Arduino core for the ESP32](https://github.com/espressif/arduino-esp32) installed.
 
 ## Features
 
-The joystick or gamepad can have the following features:
+- [Multiple joystick support](https://github.com/schnoog/Joystick_ESP32S2/blob/main/examples/MultipleJoystickTest/MultipleJoystickTest.ino)
 - Buttons (default: 32)
 - Up to 2 Hat Switches
 - X, Y, and/or Z Axis (up to 16-bit precision)
@@ -24,14 +22,18 @@ The joystick or gamepad can have the following features:
 - Steering (up to 16-bit precision)
 
 #### Known issues
+
 Unfortunately there is an issue with the Arduino-ESP32 core library which can cause problems if you use the HID joystick and the serial interface at the same time.
-Executing Serial.print or Serial.println, yes even initializing the serial console with Serial.begin() is prone to cause timing issue for the USB data transfer.
+Executing Serial.print or Serial.println, even initializing the serial console with Serial.begin(), is prone to cause timing issue for the USB data transfer.
 
 
 ## Installation Instructions
 ### Library manager
-Just search for **Joystick_ESP32S2** in the library manager of your installation of ArduinoIDE or PlatformIO and install it. 
+
+Just search for **Joystick_ESP32S2** in the library manager of your installation of ArduinoIDE or PlatformIO and install it.
+
 ### Manual installation
+
 The following instructions can be used to install the latest version of the library in the Arduino IDE (thanks to [@per1234](https://github.com/per1234) for this update):
 
 1. Download https://github.com/schnoog/Joystick_ESP32S2/archive/master.zip
@@ -50,8 +52,7 @@ build_flags =
     -DARDUINO_USB_CDC_ON_BOOT=1
 ``` 
 
-If you want to change your joysticks name, USB product id or vendor id, please consult the
-[USBOPTIONS.md](USBOPTIONS.md) or have a look into the **Joystick_WithCustomPIDandVID** example provided with this library
+If you want to change your joysticks name, USB product id or vendor id, please consult [USBOPTIONS.md](USBOPTIONS.md) or have a look into the **Joystick_WithCustomPIDandVID** example provided with this library.
 
 ## Examples
 
